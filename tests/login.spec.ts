@@ -31,9 +31,10 @@ test('TC04 Login ไม่กรอกหมายเลขโทรศัพท
   await expect(page).toHaveURL('http://localhost:5173/');
 });
 
-test('TC05 Login ไม่กรอกรหัสผ่าน', async ({ page }) => {
+test('TC05 Login ใส่รหัสน้อยกว่า 8 ตัวอักษร', async ({ page }) => {
   await page.goto('http://localhost:5173/');
   await page.getByLabel('หมายเลขโทรศัพท์มือถือ').fill('0800000000');
+  await page.getByPlaceholder('อย่างน้อย 8 ตัวอักษร').fill('wrongpa');
   await page.getByRole('button', { name: 'เข้าสู่ระบบ' }).click();
   await expect(page).toHaveURL('http://localhost:5173/');
 });
